@@ -1,24 +1,18 @@
 import React from 'react';
 import './App.css';
+import Header from "./Components/Header";
+import Navbar from "./Components/Navbar";
+import Profile from "./Components/Profile";
 
 const App = () => {
     return (
-        <Header/>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <Profile/>
+        </div>
     );
 }
 
-const Header = () => {
-    return (
-        <div>
-            <h1>MAIN COURSE</h1>
-            <span><b>0% </b></span>
-            <span><b>10% </b></span>
-            <span>20% </span>
-            <span>40% </span>
-            <span>60% </span>
-            <span>80% </span>
-            <span>100%</span>
-        </div>
-    )
-}
+
 export default App;
