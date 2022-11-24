@@ -1,0 +1,33 @@
+.header {
+    grid-area: h;
+    background-color: #858585;
+    border-radius: 5px;
+
+}
+
+
+.header img {
+    width: 70px;
+    margin: 5px 5px 5px 5px;
+    float: left;
+    transition: 0.5s;
+}
+
+.header img:hover {
+    background-color: black;
+    border-radius: 5px;
+}
+
+.header_tx {
+    font-family: 'Maven Pro', bolt, serif;
+    color: rgb(255, 255, 255);
+    margin: 10px 400px;
+    float: right;
+    text-rendering: initial;
+    transition: 1s;
+}
+
+.header_tx:hover {
+    color: black;
+    transform: scale(1.4);
+}

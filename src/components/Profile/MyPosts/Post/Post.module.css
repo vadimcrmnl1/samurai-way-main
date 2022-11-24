@@ -1,0 +1,17 @@
+.item {
+    color: whitesmoke;
+    padding: 10px;
+}
+
+.item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.likeCounts {
+    color: black;
+}
+.postMessage {
+    font-size: 20px;
+}

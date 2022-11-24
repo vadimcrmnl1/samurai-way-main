@@ -1,8 +1,9 @@
-.app-wrapper {
+.appWrapper {
     font-family: "Maven Pro", serif;
     margin: 0 auto;
     display: grid;
     width: 1200px;
+    border-radius: 5px;
     grid-template-areas:
     "h h"
     "n c"
@@ -10,11 +11,12 @@
 
     grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
+
     /*grid-gap: 20px;*/
 
 }
 
-.app-wrapper-content {
+.appWrapperContent {
     grid-area: c;
 
 }

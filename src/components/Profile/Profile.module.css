@@ -1,0 +1,12 @@
+.content {
+    background-color: #999999;
+}
+
+.profileImg img {
+    width: 1000px;
+    height: 200px;
+}
+
+.profileInfo {
+    padding: 10px;
+}

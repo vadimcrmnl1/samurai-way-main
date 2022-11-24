@@ -1,0 +1,94 @@
+.Dialogs {
+    display: grid;
+    grid-template-areas: 'd m';
+    grid-template-columns: 2fr 6fr;
+    background-color: #999999;
+}
+
+.DialogUsers {
+    grid-area: d;
+    padding: 10px;
+}
+
+.Dialog {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    align-items: center;
+    width: 200px;
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.Dialog img {
+
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
+
+}
+
+.dialogName {
+    margin-left: 15px;
+}
+
+.Dialog a {
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.Dialog a:hover {
+    color: yellow;
+}
+
+.Dialog a.DialogActive {
+    color: white;
+}
+
+.Messages {
+    grid-area: m;
+    padding: 10px;
+}
+
+.Message {
+
+}
+
+.InputButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 50px;
+    margin-right: 50px;
+}
+
+.inputMessage {
+    width: 500px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+}
+
+
+
+.buttonMessage {
+    margin-left: 20px;
+    color: white;
+    background-color: dodgerblue;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.buttonMessage:hover {
+    background-color: #1369be;
+}
+
+.buttonMessage:active {
+    color: black;
+    background-color: dodgerblue;
+}

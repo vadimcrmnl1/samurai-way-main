@@ -1,0 +1,67 @@
+.nav {
+    grid-area: n;
+    background-color: #d4d4d4;
+    border-radius: 5px;
+    padding: 5px 0 0 10px;
+
+}
+
+.people {
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+    width: 50px;
+    margin: 20px 0 20px 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.people img {
+    margin-top: 5px;
+}
+
+.nav img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.item a {
+    text-decoration: none;
+    font-size: 26px;
+
+    color: rgb(0, 0, 0);
+
+    font-family: 'Maven Pro', fantasy;
+    margin: 3px 15px;
+
+
+}
+
+.item a:hover {
+    background-color: #00ffff;
+    font-size: 28px;
+    text-decoration: none;
+    border-radius: 5px;
+    transform: scale(1.2);
+
+}
+
+.item a.activeLink {
+    color: white;
+}
+
+.sidebarActive {
+    text-decoration: none;
+    color: black;
+}
+
+.sidebarActive:hover {
+    color: yellow;
+}
+
+.activeSidebar {
+    color: white;
+}
+

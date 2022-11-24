@@ -1,0 +1,11 @@
+.MessageMe {
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 20px;
+}
+
+.MessageYou {
+    display: flex;
+    flex-direction: row;
+
+}
