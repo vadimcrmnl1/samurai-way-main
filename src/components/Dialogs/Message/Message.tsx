@@ -10,9 +10,7 @@ const Message = (props: MessagePropsType) => {
     return (
         <div>
             <div className={s.MessageMe}>{props.message}</div>
-
         </div>
-
     )
 }
 

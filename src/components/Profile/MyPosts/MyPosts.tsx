@@ -1,46 +1,47 @@
-import React from "react";
-import styles from './MyPosts.module.css';
+import React, {ChangeEvent} from "react";
+import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, PostsType, updateNewPostTextActionCreator} from "../../../redux/state";
+import {InitialStateOfPostsType} from "../../../redux/ProfileReducer";
+import InputButton from "../../Dialogs/InputButton/InputButton";
 
 
 type MyPostsProps = {
-    name: string
-    posts: Array<PostsType>
-    dispatch: (action: any) => void
-    newPostText: string
+    updateNewPostText: (text: string) => void
+    posts: InitialStateOfPostsType
+    addPost: () => void
+
 }
 
 const MyPosts = (props: MyPostsProps) => {
-
-    let PostsElements = props.posts.map(p => <Post key={p.id} message={p.post} likeCounts={p.likeCounts}/>)
-    let newPostElement = React.createRef<any>()
+    let state = props.posts
+    let PostsElements = state.postsData.map(p => <Post key={p.id}
+                                                       message={p.post}
+                                                       likeCounts={p.likeCounts}
+    />)
     let addPost = () => {
-        props.dispatch(addPostActionCreator())
+        props.addPost()
     }
-    let onPostChange = () => {
-        let text: string = newPostElement.current.value;
-        props.dispatch(updateNewPostTextActionCreator(text));
+    let onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
+        let text: string = e.currentTarget.value;
+        props.updateNewPostText(text)
     }
-    const onKeyPressHandler = (e: any) => e.key === 'Enter' && addPost()
+    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addPost()
 
     return (
-        <div className={styles.content}>
+        <div className={s.content}>
             <div>
-                <div className={styles.AddPost}>
-                    <input className={styles.inputPost}
-                           ref={newPostElement}
-                           value={props.newPostText}
-                           onChange={onPostChange}
-                           onKeyPress={onKeyPressHandler}
-                           placeholder={'Type post'}
-                    />
-                    <button className={styles.buttonPost}
-                            onClick={addPost}>Add post
-                    </button>
+                <div className={s.AddPost}>
+                    <InputButton value={state.newPostText}
+                                 name={'Add'}
+                                 onChange={onPostChange}
+                                 onKeyPress={onKeyPressHandler}
+                                 placeholder={'Type your post'}
+                                 onClick={addPost}/>
                 </div>
-                <div className={styles.user}>{props.name}</div>
-                {PostsElements}
+                <div className={s.post}>
+                    {PostsElements}
+                </div>
+
             </div>
         </div>
     )

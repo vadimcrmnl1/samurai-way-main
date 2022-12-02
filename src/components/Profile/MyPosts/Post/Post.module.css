@@ -1,17 +1,76 @@
 .item {
     color: whitesmoke;
-    padding: 10px;
+    margin: 10px 0 10px 10px;
+
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 600px;
 }
 
 .item img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    margin: 5px 0 10px 30px;
+    transition: 0.5s;
+}
+.item img:hover {
+    scale: 1.4;
 }
 
 .likeCounts {
+    display: flex;
     color: black;
+    align-items: center;
+    margin-top: 5px;
+    margin-left: 10px;
 }
+
 .postMessage {
     font-size: 20px;
+    width: 590px;
+    margin-left: 10px;
+}
+
+.favoriteIcon {
+    color: #16fafa;
+    margin: 0 3px 0 3px
+}
+
+.favoriteIcon:hover {
+    color: #11c7c7;
+}
+.favoriteIcon:active {
+    color: #8efafa;
+}
+.favoriteBorderIcon {
+    color: #16fafa;
+
+}
+
+.favoriteBorderIcon:hover {
+    color: #11c7c7;
+}
+.favoriteBorderIcon:active {
+    color: #8efafa;
+}
+.user {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    height: 50px;
+    margin: 5px 0 10px 15px;
+}
+.userName {
+    font-size: 24px;
+    margin: 15px 0 0 20px;
+    color: black;
+
+    transition: 0.5s;
+}
+.userName:hover {
+    color: white;
+    font-size: 26px;
+
+
 }

@@ -1,0 +1,35 @@
+.InputButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-right: 50px;
+}
+
+.inputMessage {
+    width: 500px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+}
+
+
+
+.buttonMessage {
+    margin-left: 20px;
+    color: white;
+    background-color: dodgerblue;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.buttonMessage:hover {
+    background-color: #1369be;
+}
+
+.buttonMessage:active {
+    color: black;
+    background-color: dodgerblue;
+}
