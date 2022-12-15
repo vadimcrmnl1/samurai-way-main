@@ -1,0 +1,43 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: initial;
+    text-align: justify;
+    background-color: #999999;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+
+}
+
+.title {
+    text-align: center;
+    font-size: 30px;
+    transition: 0.5s;
+    color: white;
+    width: max-content;
+    margin: 20px 0 30px 100px;
+}
+
+.title:hover {
+    color: yellow;
+    font-size: 32px;
+}
+
+.aboutWorld {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+
+    margin: 0 0 0 30px;
+}
+
+.aboutList {
+    font-size: 18px;
+    color: black;
+
+}
+
+.aboutList:hover {
+    color: white;
+}

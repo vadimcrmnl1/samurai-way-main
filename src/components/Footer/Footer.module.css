@@ -1,0 +1,21 @@
+.footer {
+    grid-area: f;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    background-color: #858585;
+    border-radius: 5px;
+}
+
+.signature {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+    transition: 1s;
+}
+.signature:hover {
+
+    font-size: 24px;
+    color: #00ffff;
+}
