@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 
-import ava from "./avatar.png";
+import ava from "./../assets/avatar.png";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
@@ -52,16 +52,16 @@ export const dialogsReducer = (state: InitialStateOfDialogsType = initialState, 
                 id: v1(),
                 message: state.newMessageText
             }
-            let stateCopy = {...state, messagesData: [...state.messagesData]}
-            stateCopy.newMessageText = ''
-            stateCopy.messagesData.push(newMessage)
-            return stateCopy
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
+            }
         }
         case UPDATE_NEW_MESSAGE: {
-            let stateCopy = {...state}
-
-            stateCopy.newMessageText = action.newText
-            return stateCopy
+            return {
+                ...state, newMessageText: action.newText
+            }
         }
         default:
             return state

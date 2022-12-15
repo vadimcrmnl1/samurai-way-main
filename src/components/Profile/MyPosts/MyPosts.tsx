@@ -5,21 +5,23 @@ import {InitialStateOfPostsType} from "../../../redux/ProfileReducer";
 import InputButton from "../../Dialogs/InputButton/InputButton";
 
 
-type MyPostsProps = {
+type MyPostsPropsType = {
     updateNewPostText: (text: string) => void
     posts: InitialStateOfPostsType
     addPost: () => void
 
 }
 
-const MyPosts = (props: MyPostsProps) => {
-    let state = props.posts
-    let PostsElements = state.postsData.map(p => <Post key={p.id}
+const MyPosts = (props: MyPostsPropsType) => {
+
+    let PostsElements = props.posts.postsData.map(p => <Post key={p.id}
                                                        message={p.post}
                                                        likeCounts={p.likeCounts}
     />)
     let addPost = () => {
-        props.addPost()
+        if (props.posts.newPostText.trim() !== '') {
+            props.addPost()
+        }
     }
     let onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
         let text: string = e.currentTarget.value;
@@ -31,7 +33,7 @@ const MyPosts = (props: MyPostsProps) => {
         <div className={s.content}>
             <div>
                 <div className={s.AddPost}>
-                    <InputButton value={state.newPostText}
+                    <InputButton value={props.posts.newPostText}
                                  name={'Add'}
                                  onChange={onPostChange}
                                  onKeyPress={onKeyPressHandler}

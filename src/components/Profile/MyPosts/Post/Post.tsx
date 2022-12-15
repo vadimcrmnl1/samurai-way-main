@@ -8,7 +8,7 @@ type PostProps = {
     message: string
     likeCounts: number
     key: string
-    // name: string
+
 }
 
 const Post = (props: PostProps) => {
@@ -43,7 +43,8 @@ const Post = (props: PostProps) => {
                                         onClick={ChangeLikeCountsDown}
                     />
                 </span>
-                <p></p>
+
+
             </div>
         </div>
     )

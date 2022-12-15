@@ -71,6 +71,10 @@
 .userName:hover {
     color: white;
     font-size: 26px;
-
-
+}
+.dateTime {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-right: 5px;
 }

@@ -6,19 +6,20 @@ import {DialogsPropsType} from "./DialogsContainer";
 import InputButton from "./InputButton/InputButton";
 
 
-
 const Dialogs = (props: DialogsPropsType) => {
     let state = props.messagesPage
     let messagesElements = state.messagesData.map(m => <Message key={m.id} message={m.message}/>)
     let dialogsElements = state.dialogsData.map(d => <DialogItem key={d.id} name={d.name} id={d.id}
-                                                                       avatar={d.avatar}/>)
+                                                                 avatar={d.avatar}/>)
 
     let addMessage = () => {
-       props.addMessage()
+        if (props.messagesPage.newMessageText.trim() !== '') {
+            props.addMessage()
+        }
     }
     let onMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
         let text: string = e.currentTarget.value
-            props.updateNewMessageText(text)
+        props.updateNewMessageText(text)
     }
 
 
@@ -33,12 +34,12 @@ const Dialogs = (props: DialogsPropsType) => {
             <div className={s.Messages}>
                 <div>{messagesElements}</div>
 
-                    <InputButton value={state.newMessageText}
-                                 name={'Send'}
-                                 onChange={onMessageChange}
-                                 onKeyPress={onKeyPressHandler}
-                                 placeholder={'Type your post'}
-                                 onClick={addMessage}/>
+                <InputButton value={state.newMessageText}
+                             name={'Send'}
+                             onChange={onMessageChange}
+                             onKeyPress={onKeyPressHandler}
+                             placeholder={'Type your post'}
+                             onClick={addMessage}/>
 
             </div>
         </div>

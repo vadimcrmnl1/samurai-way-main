@@ -3,6 +3,7 @@
     grid-template-areas: 'd m';
     grid-template-columns: 2fr 6fr;
     background-color: #999999;
+    border-radius: 5px;
 }
 
 .DialogUsers {
@@ -52,6 +53,11 @@
 .Messages {
     grid-area: m;
     padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 15px;
+    width: 700px;
+    height: max-content;
 }
 
 .Message {
