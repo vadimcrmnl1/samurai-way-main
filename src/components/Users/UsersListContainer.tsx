@@ -9,7 +9,7 @@ import {
     toggleIsFetchingAC,
     unFollowAC,
     UserType,
-} from "../../redux/UsersReducer";
+} from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/reduxStore";
 import axios from "axios";
 import {Users} from "./Users";

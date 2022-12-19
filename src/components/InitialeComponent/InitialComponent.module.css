@@ -17,11 +17,12 @@
     color: white;
     width: max-content;
     margin: 20px 0 30px 100px;
+
 }
 
 .title:hover {
     color: yellow;
-    font-size: 32px;
+    scale: 1.2;
 }
 
 .aboutWorld {

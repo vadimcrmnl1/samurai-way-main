@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {InitialStateOfPostsType} from "../../../redux/ProfileReducer";
+import {InitialStateOfPostsType} from "../../../redux/profile-reducer";
 import InputButton from "../../Dialogs/InputButton/InputButton";
 
 

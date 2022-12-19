@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./UsersList.module.css";
-import {InitialStateOfUsersType} from "../../redux/UsersReducer";
+import {InitialStateOfUsersType} from "../../redux/users-reducer";
 import ava from './../../assets/avatar.png'
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";

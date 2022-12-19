@@ -3,7 +3,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/reduxStore";
-import {DialogType} from "../../redux/DialogsReducer";
+import {DialogType} from "../../redux/dialogs-reducer";
 
 
 

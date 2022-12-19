@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './App.module.css';
-import Header from "./components/Header/Header";
 import {Route} from "react-router-dom";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -11,6 +10,7 @@ import {Footer} from "./components/Footer/Footer";
 import {InitialComponent} from "./components/InitialeComponent/InitialComponent";
 import {UsersListContainer} from "./components/Users/UsersListContainer";
 import {ProfileListContainer} from "./components/Profile/ProfileListContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
 
     return (
         <div className={s.appWrapper}>
-            <Header/>
+            <HeaderContainer/>
             <NavbarContainer/>
             <div className={s.appWrapperContent}>
                 <Route path='//' render={() => (<InitialComponent/>)}></Route>

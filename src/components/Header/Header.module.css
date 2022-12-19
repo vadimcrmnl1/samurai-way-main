@@ -19,10 +19,11 @@
 }
 
 .header_tx {
+    width: max-content;
     font-family: 'Maven Pro', bolt, serif;
     color: rgb(255, 255, 255);
     margin: 10px 400px;
-    float: right;
+    float: left;
     text-rendering: initial;
     transition: 1s;
 }
@@ -30,4 +31,16 @@
 .header_tx:hover {
     color: black;
     transform: scale(1.4);
+}
+
+.loginBlock {
+    width: max-content;
+float: right;
+    z-index: 9;
+    background: black;
+
+}
+.loginBlock a {
+    color: white;
+    text-decoration: none;
 }

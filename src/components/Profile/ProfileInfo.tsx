@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Profile.module.css'
-import {UserProfileType} from "../../redux/ProfileReducer";
+import {UserProfileType} from "../../redux/profile-reducer";
 import ava from "../../assets/avatar.png";
 
 type ProfileInfoPropsType = {
