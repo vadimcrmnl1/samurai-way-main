@@ -10,15 +10,17 @@ type HeaderPropsType = {
 }
 
 const Header = (props: HeaderPropsType) => {
-    debugger
+
+
     return (
         <header className={styles.header}>
             <span><NavLink to="/" activeClassName={styles.activeLink}><img src={logo} alt={"Logo"}/></NavLink></span>
             <div className={styles.loginBlock}>
 
                 {props.auth.isAuth
-                    ? <NavLink to={'/login'}>{props.auth.data.login}</NavLink>
-                    : <NavLink to={'/login'}>Login</NavLink>}
+                    // ? <NavLink to={'/login'}>login: {props.auth.data.login}</NavLink> // приходит null
+                    ? <NavLink to={'/login'}>vadimcrmnl</NavLink>
+                    : <NavLink to={'/login'}>Sign in</NavLink>}
 
             </div>
             <p className={styles.header_tx}>

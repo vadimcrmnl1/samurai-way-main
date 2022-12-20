@@ -92,7 +92,20 @@
     background: white;
     color: #ff8700;
 }
-
+.button:disabled {
+    background-color: #a65600;
+    color: #bebbbb;
+}
+.buttonDisabled {
+    width: 80px;
+    height: 25px;
+    background-color: #a65600;
+    font-size: 16px;
+    border: none;
+    color: #bebbbb;
+    border-radius: 5px;
+    margin-right: 5px;
+}
 .avaButton {
     display: flex;
     flex-direction: column;

@@ -7,7 +7,7 @@ type SetUserDataAT = {
 
 export type UsersReducerAT = SetUserDataAT
 export type InitialStateOfAuthType = {
-    resultCode: 0 | 1 | null
+    resultCode: number | null
     messages: Array<string>
     data: DataPropsType
     isAuth: boolean
