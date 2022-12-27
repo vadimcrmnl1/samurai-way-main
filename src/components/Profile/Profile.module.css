@@ -29,33 +29,50 @@
 .profileInfo {
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
     width: 250px;
 }
 
 .profileContacts {
-    width: max-content;
+    width: 150px;
+    height: max-content;
     display: flex;
     flex-direction: column;
-    padding-left: 110px;
+    border: 1px solid black;
+    border-radius: 5px;
+    align-items: center;
+    background-color: #bdbaba;
 }
 
 .profileContacts span {
     width: max-content;
     font-size: 14px;
+    padding: 3px;
+
 }
-.profileContacts span:hover {
+
+.profileContacts a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.profileContacts a:hover {
     color: white;
 }
+
 .fullName {
     font-size: 24px;
     font-weight: bold;
 }
+
 .aboutMe {
     font-size: 18px;
     color: #ffffff;
     margin-top: 40px;
 }
+
 .userId {
     height: min-content;
     width: max-content;
@@ -63,9 +80,11 @@
     color: #a2ffe8;
     margin-top: 40px;
 }
+
 .userId:hover {
     color: black;
 }
+
 .workContainer {
     position: absolute;
     display: flex;
@@ -73,6 +92,7 @@
     margin: 200px 20px 0 400px;
 
 }
+
 .workContainer span {
     font-size: 16px;
     color: black;

@@ -26,14 +26,15 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     <span className={s.userId}>ID: {props.profile.userId}</span>
                 </div>
                 <div className={s.profileContacts}>
-                    <span>Facebook: {props.profile.contacts.facebook}</span>
-                    <span>GitHub: {props.profile.contacts.github}</span>
-                    <span>VK: {props.profile.contacts.vk}</span>
-                    <span>Twitter: {props.profile.contacts.twitter}</span>
-                    <span>MainLink: {props.profile.contacts.mainLink}</span>
-                    <span>Instagram: {props.profile.contacts.instagram}</span>
-                    <span>Website: {props.profile.contacts.website}</span>
-                    <span>YouTube: {props.profile.contacts.youtube}</span>
+                    <span><b>CONTACTS</b></span>
+                    <span><a href={props.profile.contacts.facebook}>Facebook</a></span>
+                    <span><a href={props.profile.contacts.github}>GitHub</a></span>
+                    <span><a href={props.profile.contacts.vk}>VK</a></span>
+                    <span><a href={props.profile.contacts.twitter}>Twitter</a></span>
+                    <span><a href={props.profile.contacts.mainLink}>MainLink</a></span>
+                    <span><a href={props.profile.contacts.instagram}>Instagram</a></span>
+                    <span><a href={props.profile.contacts.website}>Website</a></span>
+                    <span><a href={props.profile.contacts.youtube}>Youtube</a></span>
                 </div>
                 <div className={s.workContainer}>
                     <span>Need work: {props.profile.lookingForAJob ? '+' : '-'}</span>
