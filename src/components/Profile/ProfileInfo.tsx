@@ -27,14 +27,14 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 </div>
                 <div className={s.profileContacts}>
                     <span><b>CONTACTS</b></span>
-                    <span><a href={props.profile.contacts.facebook}>Facebook</a></span>
-                    <span><a href={props.profile.contacts.github}>GitHub</a></span>
-                    <span><a href={props.profile.contacts.vk}>VK</a></span>
-                    <span><a href={props.profile.contacts.twitter}>Twitter</a></span>
-                    <span><a href={props.profile.contacts.mainLink}>MainLink</a></span>
-                    <span><a href={props.profile.contacts.instagram}>Instagram</a></span>
-                    <span><a href={props.profile.contacts.website}>Website</a></span>
-                    <span><a href={props.profile.contacts.youtube}>Youtube</a></span>
+                    <span><a href={props.profile.contacts.facebook} target='_blank'>Facebook</a></span>
+                    <span><a href={props.profile.contacts.github} target='_blank'>GitHub</a></span>
+                    <span><a href={props.profile.contacts.vk} target='_blank'>VK</a></span>
+                    <span><a href={props.profile.contacts.twitter} target='_blank'>Twitter</a></span>
+                    <span><a href={props.profile.contacts.mainLink} target='_blank'>MainLink</a></span>
+                    <span><a href={props.profile.contacts.instagram} target='_blank'>Instagram</a></span>
+                    <span><a href={props.profile.contacts.website} target='_blank'>Website</a></span>
+                    <span><a href={props.profile.contacts.youtube} target='_blank'>Youtube</a></span>
                 </div>
                 <div className={s.workContainer}>
                     <span>Need work: {props.profile.lookingForAJob ? '+' : '-'}</span>

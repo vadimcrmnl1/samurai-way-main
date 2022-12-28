@@ -4,7 +4,6 @@ import {InitialStateOfUsersType} from "../../redux/users-reducer";
 import ava from './../../assets/avatar.png'
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../api/api";
 
 
 type UsersPropsType = {
@@ -13,12 +12,11 @@ type UsersPropsType = {
     currentPage: number
     usersPage: InitialStateOfUsersType
     onPageChanged: (pageNumber: number) => void
-    follow: (userId: number) => void
-    unFollow: (userId: number) => void
     isFetching: boolean
     setCurrentPage: (currentPage: number) => void
     isFollowing: Array<number | boolean>
-    toggleIsFollowing: (isFollowing: boolean, id: number) => void
+    follow: (userId: number) => void
+    unFollow: (userId: number) => void
 
 }
 
@@ -33,8 +31,6 @@ export const Users = (props: UsersPropsType) => {
     let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
     let curPL = curP + 10;
     let slicedPages = pages.slice(curPF, curPL);
-
-    // const finalClass = props.isFollowing.some(id => id === id) ? s.buttonDisabled : s.button
 
     return <div className={s.content}>
         <div className={s.mainTitle}>Users</div>
@@ -56,27 +52,11 @@ export const Users = (props: UsersPropsType) => {
 
                     </div>
                     <div className={s.buttons}>
-                        {u.followed ? <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button} onClick={() => {
-                            props.toggleIsFollowing(true, u.id)
-                                usersAPI.unFollowUserAPI(u.id).then(response => {
-
-                                    if (response.data.resultCode === 0) {
-                                        props.unFollow(u.id)
-                                    }
-                                    props.toggleIsFollowing(false, u.id)
-                                })
-                            }}>Unfollow</button>
-                            : <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button} onClick={() => {
-                                props.toggleIsFollowing(true, u.id)
-                                usersAPI.followUserAPI(u.id).then(response => {
-                                    if (response.data.resultCode === 0) {
-                                        props.follow(u.id)
-                                    }
-                                    props.toggleIsFollowing(false, u.id)
-                                })
-
-
-                            }}>Follow</button>}
+                        {u.followed ? <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
+                                              onClick={() => {props.unFollow(u.id)}}>Unfollow</button>
+                            : <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
+                                      onClick={() => {props.follow(u.id)}}>Follow</button>
+                        }
                         <button className={s.button}>Profile</button>
                         <button className={s.button}>Chat</button>
                     </div>

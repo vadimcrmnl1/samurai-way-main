@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -36,7 +38,14 @@ type ToggleIsFollowingAT = {
     userId: number
 }
 
-export type UsersReducerAT = FollowAT | UnFollowAT | SetUsersAT | SetCurrentPageAT | SetTotalUsersCountAT | ToggleIsFetchingAT | ToggleIsFollowingAT
+export type UsersReducerAT =
+    FollowAT
+    | UnFollowAT
+    | SetUsersAT
+    | SetCurrentPageAT
+    | SetTotalUsersCountAT
+    | ToggleIsFetchingAT
+    | ToggleIsFollowingAT
 
 export type PhotosType = {
     'small': string
@@ -99,18 +108,68 @@ export const usersReducer = (state: InitialStateOfUsersType = initialState, acti
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
         case TOGGLE_IS_FOLLOWING:
-            return {...state,
+            return {
+                ...state,
                 isFollowing: action.isFollowing
-            ? [...state.isFollowing, action.userId]
-            : state.isFollowing.filter(id => id !== action.userId)}
+                    ? [...state.isFollowing, action.userId]
+                    : state.isFollowing.filter(id => id !== action.userId)
+            }
         default:
             return state
     }
 }
-export const followAC = (userId: number) => ({type: FOLLOW, userId})
-export const unFollowAC = (userId: number) => ({type: UNFOLLOW, userId})
+//action creators
+export const followSuccess = (userId: number) => ({type: FOLLOW, userId})
+export const unFollowSuccess = (userId: number) => ({type: UNFOLLOW, userId})
 export const setUsersAC = (items: Array<UserType>) => ({type: SET_USERS, items})
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage})
 export const setTotalUserCountAC = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
 export const toggleIsFetchingAC = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})
-export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) => ({type: TOGGLE_IS_FOLLOWING, isFollowing, userId})
+export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) => ({
+    type: TOGGLE_IS_FOLLOWING,
+    isFollowing,
+    userId
+})
+//thunk creators
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetchingAC(true))
+        usersAPI.getUsersAPI(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetchingAC(false))
+            dispatch(setUsersAC(data.items))
+        })
+    }
+}
+export const pageChanged = (pageNumber: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetchingAC(true))
+       dispatch(setCurrentPageAC(pageNumber))
+        usersAPI.getUsersAPI(pageNumber, pageSize).then(data => {
+            dispatch(toggleIsFetchingAC(false))
+            dispatch(setUsersAC(data.items))
+        })
+    }
+}
+export const unFollow = (userId: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFollowingAC(true, userId))
+        usersAPI.unFollowUserAPI(userId).then(response => {
+
+            if (response.data.resultCode === 0) {
+                dispatch(unFollowSuccess(userId))
+            }
+            dispatch(toggleIsFollowingAC(false, userId))
+        })
+    }
+}
+export const follow = (userId: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFollowingAC(true, userId))
+        usersAPI.followUserAPI(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(followSuccess(userId))
+            }
+            dispatch(toggleIsFollowingAC(false, userId))
+        })
+    }
+}
