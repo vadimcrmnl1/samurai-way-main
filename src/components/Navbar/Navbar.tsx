@@ -22,11 +22,16 @@ const Navbar = (props: MapStateType) => {
             <div className={styles.item}><NavLink to="/news" activeClassName={styles.activeLink}>News</NavLink></div>
             <div className={styles.item}><NavLink to="/music" activeClassName={styles.activeLink}>Music</NavLink></div>
             <div className={styles.item}><NavLink to="/photo" activeClassName={styles.activeLink}>Photo</NavLink></div>
+            {props.auth.isAuth ?
+                <div className={styles.sidebar}>
+                    <div>{SidebarElements[0]}{SidebarElements[1]}{SidebarElements[4]}</div>
 
-            <div className={styles.sidebar}>
-                <div>{SidebarElements[0]}{SidebarElements[1]}{SidebarElements[4]}</div>
+                </div> : ''
+            }
+            {/*<div className={styles.sidebar}>*/}
+            {/*    <div>{SidebarElements[0]}{SidebarElements[1]}{SidebarElements[4]}</div>*/}
 
-            </div>
+            {/*</div>*/}
         </nav>
     )
 }

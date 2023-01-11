@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST'
@@ -38,7 +39,7 @@ export type UserProfileType = {
     "lookingForAJob": boolean | null
     "lookingForAJobDescription": string
     "fullName": string
-    "userId": number | null
+    "userId": string | null
     "photos": UserPhotosType
 }
 
@@ -106,3 +107,11 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST, newText: text})
 export const setUserProfileAC = (userProfile: UserProfileType) => ({type: SET_USER_PROFILE, userProfile})
+
+export const getUserProfile = (userId: string | undefined) => { //thunk not working
+    return (dispatch: any) => {
+        usersAPI.getProfile(userId).then(response => {
+            dispatch(setUserProfileAC(response.data))
+        })
+    }
+}

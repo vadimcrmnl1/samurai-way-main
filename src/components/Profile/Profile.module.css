@@ -31,7 +31,8 @@
     flex-direction: column;
     margin-left: 40px;
     margin-right: 40px;
-    width: 250px;
+
+    width: 300px;
 }
 
 .profileContacts {
@@ -68,6 +69,7 @@
 }
 
 .aboutMe {
+    width: 100%;
     font-size: 18px;
     color: #ffffff;
     margin-top: 40px;
@@ -96,5 +98,6 @@
 .workContainer span {
     font-size: 16px;
     color: black;
-    width: 200px;
+    width: 300px;
+    
 }

@@ -6,10 +6,10 @@ import {UserProfileType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
     profile: UserProfileType
+
 }
 
 const Profile = (props: ProfilePropsType) => {
- 
     return (
         <div className={s.content}>
             <ProfileInfo profile={props.profile} />

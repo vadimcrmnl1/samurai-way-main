@@ -22,7 +22,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
 
                 <div className={s.profileInfo}>
                     <span className={s.fullName}>{props.profile.fullName}</span>
-                    <span className={s.aboutMe}>{props.profile.aboutMe}</span>
+                    <span className={s.aboutMe}>About me: {props.profile.aboutMe}</span>
                     <span className={s.userId}>ID: {props.profile.userId}</span>
                 </div>
                 <div className={s.profileContacts}>

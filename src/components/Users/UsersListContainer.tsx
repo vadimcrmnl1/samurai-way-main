@@ -14,6 +14,8 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/reduxStore";
 import {Users} from "./Users";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 type MapStatePropsType = {
@@ -23,6 +25,7 @@ type MapStatePropsType = {
     currentPage: number
     isFetching: boolean
     isFollowing: Array<number | boolean>
+    // auth: InitialStateOfAuthType
 }
 type MapDispatchToPropsType = {
     followSuccess: (userId: number) => void
@@ -66,7 +69,6 @@ export class UsersContainer extends React.Component<UsersPropsType> {
         </>
     }
 }
-
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: state.usersPage,
@@ -74,14 +76,17 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         currentPage: state.usersPage.currentPage,
         totalUsersCount: state.usersPage.totalUsersCount,
         isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.isFollowing
+        isFollowing: state.usersPage.isFollowing,
+        // auth: state.auth
     }
 }
-export const UsersListContainer = connect(mapStateToProps,
-    {
-        followSuccess: followSuccess,
-        unFollowSuccess: unFollowSuccess,
-        setTotalUserCount: setTotalUserCountAC,
-        toggleIsFollowing: toggleIsFollowingAC,
-        getUsers, pageChanged, unFollow, follow
-    })(UsersContainer)
+
+export const UsersListContainer = compose<React.ComponentType>(connect(mapStateToProps,
+        {
+            followSuccess: followSuccess,
+            unFollowSuccess: unFollowSuccess,
+            setTotalUserCount: setTotalUserCountAC,
+            toggleIsFollowing: toggleIsFollowingAC,
+            getUsers, pageChanged, unFollow, follow
+        }),
+    withAuthRedirect)(UsersContainer)

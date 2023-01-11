@@ -25,6 +25,7 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addMessage()
 
+    // if (props.auth.isAuth === false) return <Redirect to={'/login'}/>
     return (
 
         <div className={s.Dialogs}>

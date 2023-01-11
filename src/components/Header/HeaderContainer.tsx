@@ -1,33 +1,31 @@
 import React from "react";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import Header from "./Header";
-import {InitialStateOfAuthType, setAuthUserDataAC} from "../../redux/auth-reducer";
+import {getAuthUserData, InitialStateOfAuthType, setAuthUserDataAC} from "../../redux/auth-reducer";
 import {AppStateType} from "../../redux/reduxStore";
 import {connect} from "react-redux";
-import {usersAPI} from "../../api/api";
 
 type MapStateToPropsType = {
     auth: InitialStateOfAuthType
-
+    login: string | null
 
 }
-type MapDispatchToPropsType = typeof actions
+type MapDispatchToPropsType = {
+    setAuthUserData: (id: number | null, email: string | null, login: string | null) => void
+    getAuthUserData: () => void
+}
 type AuthPropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps
 
 class HeaderContainerComponent extends React.Component<AuthPropsType> {
 
     componentDidMount() {
-        usersAPI.getUserInfoAPI().then(response => {
-            if (response.resultCode === 0) {
-                let {id, login, email} = response.data
-                this.props.setAuthUserDataAC(id, email, login)
-            }
+        this.props.getAuthUserData()
 
-        })
     }
 
+
     render() {
-        return <Header auth={this.props.auth}/>
+        return <Header auth={this.props.auth} login={this.props.login}/>
     }
 
 }
@@ -35,11 +33,12 @@ class HeaderContainerComponent extends React.Component<AuthPropsType> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         auth: state.auth,
-
+        login: state.auth.data.login
     }
 }
-const actions = {
-    setAuthUserDataAC
-}
+
 let WithUrlDataContainerComponent = withRouter(HeaderContainerComponent)
-export const HeaderContainer = connect(mapStateToProps, actions)(WithUrlDataContainerComponent)
+export const HeaderContainer = connect(mapStateToProps, {
+    setAuthUserData: setAuthUserDataAC,
+    getAuthUserData
+})(WithUrlDataContainerComponent)
