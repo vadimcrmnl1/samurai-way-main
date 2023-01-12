@@ -7,15 +7,10 @@
     border-radius: 5px;
 }
 
-.profileImg img {
-    width: 1000px;
-    height: 200px;
-    border-radius: 5px;
-}
 
 .profileInfoContainer {
-    width: 900px;
-    height: 300px;
+    width: 99%;
+   min-height: 40vh;
     border-radius: 5px;
     padding: 5px;
     display: flex;
@@ -23,6 +18,8 @@
 }
 
 .profileInfoContainer img {
+   width: 350px;
+    height: 350px;
     border-radius: 50%;
 }
 
@@ -37,6 +34,7 @@
 
 .profileContacts {
     width: 150px;
+    margin-right: 20px;
     height: max-content;
     display: flex;
     flex-direction: column;
@@ -88,10 +86,10 @@
 }
 
 .workContainer {
-    position: absolute;
+
     display: flex;
     flex-direction: column;
-    margin: 200px 20px 0 400px;
+
 
 }
 
@@ -100,4 +98,12 @@
     color: black;
     width: 300px;
     
+}
+.status {
+    font-size: 16px;
+    margin-top: 10px;
+    color: yellow;
+}
+.status:hover {
+    color: gold;
 }

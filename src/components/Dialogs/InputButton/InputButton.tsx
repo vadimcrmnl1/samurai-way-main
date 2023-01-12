@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import styles from './InputButton.module.css'
+import s from './InputButton.module.css'
 
 type InputButtonPropsType = {
     value: string
@@ -14,14 +14,14 @@ const InputButton = (props: InputButtonPropsType) => {
 
 
     return (
-        <div className={styles.InputButton}>
-            <input className={styles.inputMessage}
+        <div className={s.InputButton}>
+            <input className={s.inputMessage}
                    value={props.value}
                    placeholder={props.placeholder}
                    onChange={props.onChange}
                    onKeyPress={props.onKeyPress}
             />
-            <button className={styles.buttonMessage}
+            <button className={s.buttonMessage}
                     onClick={props.onClick}
             >{props.name}
             </button>

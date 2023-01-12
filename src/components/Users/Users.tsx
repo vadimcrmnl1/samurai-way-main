@@ -61,7 +61,7 @@ export const Users = (props: UsersPropsType) => {
                         <button className={s.button}>Chat</button>
                     </div>
                 </span>
-                <span>
+                <div>
                     <div className={s.nameStatus}>
                         <div className={s.fullName}>{u.name}</div>
                         <div className={s.status}>{u.status}</div>
@@ -69,7 +69,7 @@ export const Users = (props: UsersPropsType) => {
                     <div className={s.userProps}>
                         <div>user ID {u.id}</div>
                     </div>
-                </span>
+                </div>
             </div>
         )}</div>
         <div className={s.pagesArea}>

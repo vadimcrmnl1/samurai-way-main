@@ -8,8 +8,8 @@ type MessagePropsType = {
 const Message = (props: MessagePropsType) => {
 
     return (
-        <div>
-            <div className={s.MessageMe}>{props.message}</div>
+        <div className={s.MessageMe}>
+            <div>{props.message}</div>
         </div>
     )
 }

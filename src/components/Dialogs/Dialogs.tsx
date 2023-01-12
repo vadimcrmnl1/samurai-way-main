@@ -28,21 +28,24 @@ const Dialogs = (props: DialogsPropsType) => {
     // if (props.auth.isAuth === false) return <Redirect to={'/login'}/>
     return (
 
-        <div className={s.Dialogs}>
-            <div className={s.DialogUsers}>
-                {dialogsElements}
-            </div>
-            <div className={s.Messages}>
-                <div>{messagesElements}</div>
+        <div className={s.dialogsContainer}>
+            <div className={s.dialogsBlock}>
+                <div className={s.DialogUsers}>
+                    {dialogsElements}
+                </div>
+                <div className={s.Messages}>
+                    <div>{messagesElements}</div>
 
-                <InputButton value={state.newMessageText}
-                             name={'Send'}
-                             onChange={onMessageChange}
-                             onKeyPress={onKeyPressHandler}
-                             placeholder={'Type your post'}
-                             onClick={addMessage}/>
+                    <InputButton value={state.newMessageText}
+                                 name={'Send'}
+                                 onChange={onMessageChange}
+                                 onKeyPress={onKeyPressHandler}
+                                 placeholder={'Type your post'}
+                                 onClick={addMessage}/>
 
+                </div>
             </div>
+
         </div>
     )
 }

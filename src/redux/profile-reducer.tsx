@@ -1,9 +1,10 @@
 import {v1} from "uuid";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST = 'UPDATE-NEW-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 export type AddPostActionType = {
     type: 'ADD-POST'
@@ -17,8 +18,12 @@ export type SetUserProfileAT = {
     type: 'SET_USER_PROFILE'
     userProfile: UserProfileType
 }
+export type SetStatusAT = {
+    type: 'SET_STATUS'
+    userStatus: string
+}
 
-type ProfileReducerAT = AddPostActionType | UpdateNewPostActionType | SetUserProfileAT
+type ProfileReducerAT = AddPostActionType | UpdateNewPostActionType | SetUserProfileAT | SetStatusAT
 type UserPhotosType = {
     "small": string
     "large": string
@@ -42,7 +47,6 @@ export type UserProfileType = {
     "userId": string | null
     "photos": UserPhotosType
 }
-
 type PostType = {
     id: string
     post: string
@@ -51,6 +55,7 @@ type PostType = {
 export type InitialStateOfPostsType = {
     postsData: Array<PostType>
     newPostText: string
+    userStatus: string
     userProfile: UserProfileType
 }
 let initialState = {
@@ -59,6 +64,7 @@ let initialState = {
         {id: v1(), post: 'It is my first post', likeCounts: 6}
     ],
     newPostText: '',
+    userStatus: '',
     userProfile: {
         "aboutMe": '',
         "contacts": {
@@ -97,6 +103,9 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
         case UPDATE_NEW_POST: {
             return {...state, newPostText: action.newText}
         }
+        case SET_STATUS: {
+            return {...state, userStatus: action.userStatus}
+        }
         case SET_USER_PROFILE: {
             return {...state, userProfile: action.userProfile}
         }
@@ -107,11 +116,30 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST, newText: text})
 export const setUserProfileAC = (userProfile: UserProfileType) => ({type: SET_USER_PROFILE, userProfile})
+export const setStatusAC = (userStatus: string) => ({type: SET_STATUS, userStatus})
 
-export const getUserProfile = (userId: string | undefined) => { //thunk not working
+export const getUserProfile = (userId: string | undefined) => {
     return (dispatch: any) => {
         usersAPI.getProfile(userId).then(response => {
             dispatch(setUserProfileAC(response.data))
+        })
+    }
+}
+export const getStatus = (userId: string) => {
+    debugger
+    return (dispatch: any) => {
+        profileAPI.getStatus(userId).then(response => {
+            dispatch(setStatusAC(response.data))
+        })
+    }
+}
+export const updateStatus = (userStatus: string) => {
+    return (dispatch: any) => {
+        profileAPI.updateStatus(userStatus).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatusAC(userStatus))
+            }
+
         })
     }
 }

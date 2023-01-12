@@ -50,9 +50,9 @@
 .userBlock {
     display: flex;
     align-content: flex-start;
-    width: 900px;
+    width: 95%;
     height: 150px;
-    margin: 5px 0 5px 20px;
+    margin: 10px;
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -113,9 +113,8 @@
 }
 
 .nameStatus {
-    text-align: left;
-    padding: 10px;
-    position: absolute;
+    display: flex;
+    flex-direction: column;
 }
 
 .fullName {
@@ -129,8 +128,9 @@
 }
 
 .userProps {
-    margin: 15px 0 0 600px;
-    text-align: right;
+   display: flex;
+    justify-content: end;
+
     color: #5affff;
 }
 

@@ -1,23 +1,25 @@
 .InputButton {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: end;
+    width: 100%;
     margin-top: 20px;
-    margin-right: 50px;
+
 }
 
 .inputMessage {
-    width: 500px;
-    height: 30px;
+    width: 40%;
+    margin-right: 20px;
     font-size: 14px;
     border-radius: 5px;
     border: none;
 }
 
 
-
 .buttonMessage {
-    margin-left: 20px;
+    height: 30px;
+    width: 60px;
+    margin-right: 10px;
     color: white;
     background-color: dodgerblue;
     border: none;

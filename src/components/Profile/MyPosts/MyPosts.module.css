@@ -2,19 +2,19 @@
     color: yellow;
     padding: 10px;
 }
+
 .content {
-    border-radius: 5px;
-    height: 100%;
-}
-.AddPost {
     display: flex;
-    flex-direction: row;
-    justify-content: left;
+    border-radius: 5px;
+    height: 50%;
+}
+
+.AddPost {
     padding: 10px;
 }
 
 .post {
-
+    width: 100%;
     font-size: 14px;
     border-radius: 5px;
     border: none;
