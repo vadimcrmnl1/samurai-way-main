@@ -30,9 +30,19 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({userStatus: e.currentTarget.value})
     }
+    onEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && this.offEditMode()
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+
+        if (prevProps.userStatus !== this.props.userStatus) {
+            this.setState({
+                status: this.props.userStatus
+            })
+        }
+    }
 
     render() {
-        console.log(this.props.userStatus)
+      
         return (
             <div>
                 {!this.state.editMode ?
@@ -40,7 +50,12 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                         <span onDoubleClick={this.onEditMode}>Status: {!this.props.userStatus ? 'no status' : this.props.userStatus}</span>
                     </div> :
                     <div>
-                        <input onChange={this.changeStatus} value={this.state.userStatus} autoFocus={true} onBlur={this.offEditMode}/>
+                        <input onChange={this.changeStatus}
+                               value={this.state.userStatus}
+                               autoFocus={true}
+                               onBlur={this.offEditMode}
+                               onKeyDown={this.onEnterPress}
+                        />
                     </div>}
 
             </div>
