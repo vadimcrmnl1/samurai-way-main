@@ -1,0 +1,31 @@
+.inputButtonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-end;
+    width: 250px;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.input {
+   display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.button {
+    background: #1369be;
+    color: white;
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.button:hover {
+    background: #104b89;
+}
+.button:active {
+    background: white;
+    color: #1369be;
+}

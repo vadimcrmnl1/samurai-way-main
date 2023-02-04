@@ -3,17 +3,14 @@ import {v1} from "uuid";
 import ava from "./../assets/avatar.png";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE'
+
 
 export type AddMessageActionType = {
     type: 'ADD-MESSAGE'
-    newMessage: string
+    newMessageText: string
 }
-export type UpdateNewMessageActionType = {
-    type: 'UPDATE-NEW-MESSAGE'
-    newText: string
-}
-export type DialogsReducerAT = AddMessageActionType | UpdateNewMessageActionType
+
+export type DialogsReducerAT = AddMessageActionType
 export type DialogType = {
     id: string
     name: string
@@ -26,7 +23,7 @@ type MessageType = {
 export type InitialStateOfDialogsType = {
     dialogsData: Array<DialogType>
     messagesData: Array<MessageType>
-    newMessageText: string
+
 }
 
 export const initialState = {
@@ -42,7 +39,7 @@ export const initialState = {
         {id: v1(), message: 'How are you?'},
         {id: v1(), message: 'I am right'}
     ],
-    newMessageText: '',
+
 }
 
 export const dialogsReducer = (state: InitialStateOfDialogsType = initialState, action: DialogsReducerAT): InitialStateOfDialogsType => {
@@ -50,23 +47,19 @@ export const dialogsReducer = (state: InitialStateOfDialogsType = initialState, 
         case ADD_MESSAGE: {
             let newMessage: MessageType = {
                 id: v1(),
-                message: state.newMessageText
+                message: action.newMessageText
             }
             return {
                 ...state,
                 messagesData: [...state.messagesData, newMessage],
-                newMessageText: ''
+
             }
         }
-        case UPDATE_NEW_MESSAGE: {
-            return {
-                ...state, newMessageText: action.newText
-            }
-        }
+
         default:
             return state
     }
 }
-export const AddMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const UpdateNewMessageActionCreator = (text: string) => ({type: UPDATE_NEW_MESSAGE, newText: text})
+export const AddMessageActionCreator = (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText})
+
 

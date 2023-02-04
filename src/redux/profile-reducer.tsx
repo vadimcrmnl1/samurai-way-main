@@ -2,17 +2,13 @@ import {v1} from "uuid";
 import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST'
+
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
 export type AddPostActionType = {
     type: 'ADD-POST'
-    newPost: string
-}
-export type UpdateNewPostActionType = {
-    type: 'UPDATE-NEW-POST'
-    newText: string
+    newPostText: string
 }
 export type SetUserProfileAT = {
     type: 'SET_USER_PROFILE'
@@ -23,7 +19,7 @@ export type SetStatusAT = {
     userStatus: string
 }
 
-type ProfileReducerAT = AddPostActionType | UpdateNewPostActionType | SetUserProfileAT | SetStatusAT
+type ProfileReducerAT = AddPostActionType | SetUserProfileAT | SetStatusAT
 type UserPhotosType = {
     "small": string
     "large": string
@@ -93,16 +89,14 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
         case ADD_POST: {
             let newPost: PostType = {
                 id: v1(),
-                post: state.newPostText,
+                post: action.newPostText,
                 likeCounts: 0
             }
 
-            return  {...state, postsData: [newPost, ...state.postsData], newPostText: '',}
+            return  {...state, postsData: [newPost, ...state.postsData]}
 
         }
-        case UPDATE_NEW_POST: {
-            return {...state, newPostText: action.newText}
-        }
+
         case SET_STATUS: {
             return {...state, userStatus: action.userStatus}
         }
@@ -113,8 +107,8 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
             return state
     }
 }
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST, newText: text})
+export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText})
+
 export const setUserProfileAC = (userProfile: UserProfileType) => ({type: SET_USER_PROFILE, userProfile})
 export const setStatusAC = (userStatus: string) => ({type: SET_STATUS, userStatus})
 

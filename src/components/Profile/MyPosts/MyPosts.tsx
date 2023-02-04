@@ -1,14 +1,14 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {InitialStateOfPostsType} from "../../../redux/profile-reducer";
-import InputButton from "../../Dialogs/InputButton/InputButton";
+import {AddPostReduxForm, PostsFormDataType} from "./addPostForm/AddPostForm";
 
 
 type MyPostsPropsType = {
-    updateNewPostText: (text: string) => void
+
     posts: InitialStateOfPostsType
-    addPost: () => void
+    addPost: (newPostText: string) => void
 
 }
 
@@ -18,27 +18,16 @@ const MyPosts = (props: MyPostsPropsType) => {
                                                        message={p.post}
                                                        likeCounts={p.likeCounts}
     />)
-    let addPost = () => {
-        if (props.posts.newPostText.trim() !== '') {
-            props.addPost()
-        }
+
+    const addNewPost = (formData: PostsFormDataType) => {
+        props.addPost(formData.newPostText)
     }
-    let onPostChange = (e: ChangeEvent<HTMLInputElement>) => {
-        let text: string = e.currentTarget.value;
-        props.updateNewPostText(text)
-    }
-    const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addPost()
 
     return (
         <div className={s.content}>
             <div>
                 <div className={s.AddPost}>
-                    <InputButton value={props.posts.newPostText}
-                                 name={'Add'}
-                                 onChange={onPostChange}
-                                 onKeyPress={onKeyPressHandler}
-                                 placeholder={'Type your post'}
-                                 onClick={addPost}/>
+                   <AddPostReduxForm onSubmit={addNewPost}/>
                 </div>
                 <div className={s.post}>
                     {PostsElements}
