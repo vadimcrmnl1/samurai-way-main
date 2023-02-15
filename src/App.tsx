@@ -11,7 +11,7 @@ import {InitialComponent} from "./components/InitialeComponent/InitialComponent"
 import {UsersListContainer} from "./components/Users/UsersListContainer";
 import {ProfileListContainer} from "./components/Profile/ProfileListContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
-import {Login} from './components/Login/Login';
+import {LoginContainer} from './components/Login/Login';
 
 
 const App = () => {
@@ -29,10 +29,11 @@ const App = () => {
                 <Route path='/music' component={Music}></Route>
                 <Route path='/photo' component={Photo}></Route>
                 <Route path='/users' component={UsersListContainer}></Route>
-                <Route path='/login' component={Login}></Route>
+                <Route path='/login' component={LoginContainer}></Route>
             </div>
             <Footer/>
         </div>
+
     );
 }
 

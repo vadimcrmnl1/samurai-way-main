@@ -46,8 +46,8 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
         return (
             <div>
                 {!this.state.editMode ?
-                    <div className={s.status}>
-                        <span onDoubleClick={this.onEditMode}>Status: {!this.props.userStatus ? 'no status' : this.props.userStatus}</span>
+                    <div className={s.status}>Status:
+                        <span onDoubleClick={this.onEditMode}> {!this.props.userStatus ? 'no status' : this.props.userStatus}</span>
                     </div> :
                     <div>
                         <input onChange={this.changeStatus}
