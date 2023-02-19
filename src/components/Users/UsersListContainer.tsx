@@ -16,6 +16,12 @@ import {AppStateType} from "../../redux/reduxStore";
 import {Users} from "./Users";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage, getIsFetching, getIsFollowing,
+    getTotalUsersCount,
+    getUsersPage,
+    getUsersPageSize
+} from "../../redux/selectors/users-selectors";
 
 
 type MapStatePropsType = {
@@ -71,12 +77,12 @@ export class UsersContainer extends React.Component<UsersPropsType> {
 }
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        usersPage: state.usersPage,
-        pageSize: state.usersPage.pageSize,
-        currentPage: state.usersPage.currentPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.isFollowing,
+        usersPage: getUsersPage(state),
+        pageSize: getUsersPageSize(state),
+        currentPage: getCurrentPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        isFetching: getIsFetching(state),
+        isFollowing: getIsFollowing(state),
         // auth: state.auth
     }
 }

@@ -52,12 +52,13 @@ export const Users = (props: UsersPropsType) => {
 
                     </div>
                     <div className={s.buttons}>
-                        {u.followed ? <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
+                        {u.followed ? <button style={{backgroundColor: 'green'}}
+                                              disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
                                               onClick={() => {props.unFollow(u.id)}}>Unfollow</button>
                             : <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
                                       onClick={() => {props.follow(u.id)}}>Follow</button>
                         }
-                        <button className={s.button}>Profile</button>
+                        <NavLink to={'/profile/' + u.id}><button className={s.button}>Profile</button></NavLink>
                         <button className={s.button}>Chat</button>
                     </div>
                 </span>
@@ -73,8 +74,8 @@ export const Users = (props: UsersPropsType) => {
             </div>
         )}</div>
         <div className={s.pagesArea}>
-            {slicedPages.map(p => {
-                return <button className={props.currentPage === p ? s.selectedPage : s.pageNumber}
+            {slicedPages.map((p, index) => {
+                return <button key={index} className={props.currentPage === p ? s.selectedPage : s.pageNumber}
                                onClick={() => {
                                    props.onPageChanged(p)
                                }}>{p}</button>

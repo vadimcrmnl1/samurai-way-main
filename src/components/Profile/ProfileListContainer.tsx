@@ -7,6 +7,7 @@ import {getStatus, getUserProfile, setUserProfileAC, updateStatus, UserProfileTy
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {getUserProfileInfo, getUserStatus} from "../../redux/selectors/profile-selectors";
 
 type MapStateToPropsType = {
     userProfile: UserProfileType
@@ -46,8 +47,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        userProfile: state.profilePage.userProfile,
-        userStatus: state.profilePage.userStatus
+        userProfile: getUserProfileInfo(state),
+        userStatus: getUserStatus(state)
 
     }
 }

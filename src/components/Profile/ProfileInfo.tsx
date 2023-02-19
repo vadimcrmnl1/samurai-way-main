@@ -8,6 +8,7 @@ type ProfileInfoPropsType = {
     profile: UserProfileType
     userStatus: string
     updateStatus: (userStatus: string) => void
+
 }
 
 

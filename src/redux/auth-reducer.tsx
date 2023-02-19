@@ -80,10 +80,11 @@ const getCaptchaAC = (captcha: boolean | null, url: string | null) => {
 }
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    authAPI.getMe().then(response => {
+    return authAPI.getMe().then(response => {
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data
             dispatch(setAuthUserDataAC(id, email, login))
+
         }
     })
 }
@@ -93,16 +94,11 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserData())
+
             }
             if (response.data.resultCode === 10) {
                 dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
-                loginAPI.getCaptcha().then((response) => {
-                    dispatch(getCaptchaAC(true, response.data.url))
-                    console.log('state', initialState)
 
-                    console.log('response', response)
-                    console.log('state.captcha', initialState.captcha)
-                })
             } else {
                 dispatch(stopSubmit('login', {
                     _error: response.data.messages.length > 0
@@ -128,11 +124,9 @@ export const captchaTC = () => (dispatch: Dispatch) => {
     loginAPI.getCaptcha().then((response) => {
         if (response.data.resultCode === 10) {
             dispatch(getCaptchaAC(true, response.data.url))
-            console.log('state', initialState)
+            console.log('captcha', response)
         }
 
-        // console.log('response', response)
-        // console.log('state.captcha', initialState.captcha)
     })
 
 }

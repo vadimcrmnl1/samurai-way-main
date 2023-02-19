@@ -6,6 +6,7 @@ const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
+
 export type AddPostActionType = {
     type: 'ADD-POST'
     newPostText: string
@@ -18,6 +19,7 @@ export type SetStatusAT = {
     type: 'SET_STATUS'
     userStatus: string
 }
+
 
 type ProfileReducerAT = AddPostActionType | SetUserProfileAT | SetStatusAT
 type UserPhotosType = {
@@ -96,10 +98,10 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
             return  {...state, postsData: [newPost, ...state.postsData]}
 
         }
-
         case SET_STATUS: {
             return {...state, userStatus: action.userStatus}
         }
+
         case SET_USER_PROFILE: {
             return {...state, userProfile: action.userProfile}
         }

@@ -2,11 +2,12 @@ import {Redirect} from "react-router-dom";
 import React, {Component, ComponentType} from "react";
 import {AppStateType} from "../redux/reduxStore";
 import {connect} from "react-redux";
+import {getUserAuth} from "../redux/selectors/authentifical-selectors";
 
 
 const mapStateToRedirectProps = (state: AppStateType) => {
     return {
-        auth: state.auth.isAuth
+        auth: getUserAuth(state)
     }
 }
 

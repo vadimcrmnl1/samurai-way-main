@@ -8,6 +8,7 @@ type ProfilePropsType = {
     profile: UserProfileType
     userStatus: string
     updateStatus: (userStatus: string) => void
+
 }
 
 const Profile = (props: ProfilePropsType) => {
