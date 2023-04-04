@@ -3,6 +3,8 @@ import s from './LoginForm.module.css'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, minLengthCreator, required} from "../../utils/validators/validators";
 import {Input} from "../common/FormControls/FormControls";
+import {selectCaptchaUrl} from "../../redux/selectors/authentifical-selectors";
+import {useSelector} from "react-redux";
 
 
 
@@ -10,16 +12,17 @@ export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
-    captcha?: boolean
-    url: string
+    captcha?: string
 }
 
-const minLengthLoginForm = minLengthCreator(7)
+const minLengthLoginForm = minLengthCreator(3)
 const maxLengthLoginForm = maxLengthCreator(40)
 
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
+    const captcha = useSelector(selectCaptchaUrl)
+    console.log(captcha)
     return (
 
         <form onSubmit={props.handleSubmit}>
@@ -53,9 +56,9 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <div>
                     <button className={s.button}>Log in</button>
                 </div>
-                {props.error === 'Incorrect anti-bot symbols' &&
+                {captcha !== '' &&
                     <div>
-                    <img src={''} alt={'Captcha'}/>
+                    <img src={captcha} alt={'Captcha'}/>
                     <Field style={{margin: '5px'}}
                            name={'captcha'}
                            placeholder={'Captcha'}

@@ -9,8 +9,7 @@ const GET_CAPTCHA = 'GET_CAPTCHA'
 
 type GetCaptchaAT = {
     type: 'GET_CAPTCHA'
-    captcha: boolean
-    url: string
+    captcha: string
 }
 type SetUserDataAT = {
     type: 'SET_USER_DATA',
@@ -28,8 +27,8 @@ export type InitialStateOfAuthType = {
     messages: Array<string>
     data: DataPropsType
     isAuth: boolean
-    captcha: boolean | null
-    url: string | null
+    captcha?: string
+
 }
 export type DataPropsType = {
     id: number | null
@@ -47,8 +46,7 @@ let initialState = {
         login: null,
     },
     isAuth: false,
-    captcha: false,
-    url: null
+    captcha: '',
 }
 export const authReducer = (state: InitialStateOfAuthType = initialState, action: UsersReducerAT): InitialStateOfAuthType => {
     switch (action.type) {
@@ -61,8 +59,7 @@ export const authReducer = (state: InitialStateOfAuthType = initialState, action
         case RESET_USER_AUTH_DATA:
             return {...state, ...initialState}
         case GET_CAPTCHA:
-
-            return {...state, captcha: action.captcha, url: action.url}
+            return {...state, captcha: action.captcha}
         default:
             return state
     }
@@ -75,11 +72,11 @@ export const setAuthUserDataAC = (id: number | null, email: string | null, login
 const resetAuthDataAC = () => {
     return {type: RESET_USER_AUTH_DATA}
 }
-const getCaptchaAC = (captcha: boolean | null, url: string | null) => {
-    return {type: GET_CAPTCHA, captcha, url}
+const getCaptchaAC = (captcha: string) => {
+    return {type: GET_CAPTCHA, captcha}
 }
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
     return authAPI.getMe().then(response => {
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data
@@ -88,45 +85,31 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         }
     })
 }
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
-
-    loginAPI.login(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserData())
-
-            }
-            if (response.data.resultCode === 10) {
-                dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
-
-            } else {
-                dispatch(stopSubmit('login', {
-                    _error: response.data.messages.length > 0
-                        ? response.data.messages[0] : ''
-                }))
-                dispatch(getCaptchaAC(true, response.data.url))
-
-            }
-        })
-
+export const login = (email: string, password: string, rememberMe: boolean, captcha?: string) => async (dispatch: any) => {
+    const response = await loginAPI.login(email, password, rememberMe, captcha)
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    }
+    if (response.data.resultCode === 10) {
+        dispatch(stopSubmit('login', {_error: response.data.messages[0]}))
+        dispatch(getCaptchaTC())
+    } else {
+        dispatch(stopSubmit('login', {
+            _error: response.data.messages.length > 0
+                ? response.data.messages[0] : ''
+        }))
+    }
 }
 
-export const logout = () => (dispatch: Dispatch) => {
-    loginAPI.logout()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(resetAuthDataAC())
-            }
-        })
+export const logout = () => async (dispatch: Dispatch) => {
+    const response = await loginAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(resetAuthDataAC())
+    }
 }
-export const captchaTC = () => (dispatch: Dispatch) => {
-
-    loginAPI.getCaptcha().then((response) => {
-        if (response.data.resultCode === 10) {
-            dispatch(getCaptchaAC(true, response.data.url))
-            console.log('captcha', response)
-        }
-
-    })
+export const getCaptchaTC = () => async (dispatch: Dispatch) => {
+    const response = await loginAPI.getCaptcha()
+            dispatch(getCaptchaAC(response.data.url))
+        console.log('captcha', response)
 
 }

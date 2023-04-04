@@ -2,7 +2,7 @@ import React from "react";
 import s from './Login.module.css'
 import {FormDataType, LoginReduxForm,} from "./LoginForm";
 import {connect} from "react-redux";
-import {captchaTC, login} from "../../redux/auth-reducer";
+import {getCaptchaTC, login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/reduxStore";
 import {getUserAuth, getUserId} from "../../redux/selectors/authentifical-selectors";
@@ -10,7 +10,7 @@ import {getUserAuth, getUserId} from "../../redux/selectors/authentifical-select
 export const Login = (props: any) => {
 
     const onSubmit = (formData: FormDataType) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
 
     }
 
@@ -36,8 +36,7 @@ export const Login = (props: any) => {
 type MapStateToPropsType = {
     isAuth: boolean
     userId: number | null
-    captcha?: boolean | null
-    url: string | null
+    captcha?: string
 
 }
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -46,8 +45,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isAuth: getUserAuth(state),
         userId: getUserId(state),
         captcha: state.auth.captcha,
-        url: state.auth.url
+
     }
 }
 
-export const LoginContainer = connect(mapStateToProps, {login, captchaTC})(Login)
+export const LoginContainer = connect(mapStateToProps, {login, captchaTC: getCaptchaTC})(Login)

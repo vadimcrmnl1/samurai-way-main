@@ -6,7 +6,7 @@ import {MapStateType} from "./NavbarContainer";
 
 const Navbar = (props: MapStateType) => {
 
-    const SidebarElements = props.dialogs.map(el => (<div className={styles.people}>
+    const SidebarElements = props.dialogs.map(el => (<div key={el.id} className={styles.people}>
         <img src={el.avatar} alt={'User Photo'}/>
         <NavLink className={styles.sidebarActive} to={'/dialogs/' + el.id}
                  activeClassName={styles.activeSidebar}>{el.name}</NavLink>

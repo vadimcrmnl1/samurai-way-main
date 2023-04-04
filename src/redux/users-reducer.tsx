@@ -37,7 +37,10 @@ type ToggleIsFollowingAT = {
     isFollowing: boolean
     userId: number
 }
-
+type OnlyFriendsAT = {
+    type: 'ONLY_FRIENDS'
+    followed: boolean
+}
 export type UsersReducerAT =
     FollowAT
     | UnFollowAT
@@ -46,6 +49,7 @@ export type UsersReducerAT =
     | SetTotalUsersCountAT
     | ToggleIsFetchingAT
     | ToggleIsFollowingAT
+| OnlyFriendsAT
 
 export type PhotosType = {
     'small': string
@@ -114,6 +118,8 @@ export const usersReducer = (state: InitialStateOfUsersType = initialState, acti
                     ? [...state.isFollowing, action.userId]
                     : state.isFollowing.filter(id => id !== action.userId)
             }
+        case "ONLY_FRIENDS":
+            return {...state, items: state.items.filter(i => i.followed === action.followed)}
         default:
             return state
     }
@@ -130,6 +136,7 @@ export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) => ({
     isFollowing,
     userId
 })
+export const onlyFriendsAC = (followed: boolean) => ({type: 'ONLY_FRIENDS', followed} as const)
 //thunk creators
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: any) => {

@@ -1,9 +1,10 @@
 import React from "react";
 import s from "./UsersList.module.css";
-import {InitialStateOfUsersType} from "../../redux/users-reducer";
+import {InitialStateOfUsersType, onlyFriendsAC} from "../../redux/users-reducer";
 import ava from './../../assets/avatar.png'
 import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 
 type UsersPropsType = {
@@ -17,10 +18,13 @@ type UsersPropsType = {
     isFollowing: Array<number | boolean>
     follow: (userId: number) => void
     unFollow: (userId: number) => void
-
 }
 
 export const Users = (props: UsersPropsType) => {
+    const dispatch = useDispatch()
+    const handleFriendsOnly = () => {
+        dispatch(onlyFriendsAC(true))
+    }
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -34,9 +38,10 @@ export const Users = (props: UsersPropsType) => {
 
     return <div className={s.content}>
         <div className={s.mainTitle}>Users</div>
+        <button className={s.button} onClick={handleFriendsOnly}>FRIENDS</button>
         <div className={s.pagesArea}>
-            {slicedPages.map(p => {
-                return <button className={props.currentPage === p ? s.selectedPage : s.pageNumber}
+            {slicedPages.map((p, index) => {
+                return <button key={index} className={props.currentPage === p ? s.selectedPage : s.pageNumber}
                                onClick={() => {
                                    props.onPageChanged(p)
                                }}>{p}</button>

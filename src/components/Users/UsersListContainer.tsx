@@ -17,7 +17,9 @@ import {Users} from "./Users";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {
-    getCurrentPage, getIsFetching, getIsFollowing,
+    getCurrentPage,
+    getIsFetching,
+    getIsFollowing,
     getTotalUsersCount,
     getUsersPage,
     getUsersPageSize
@@ -49,7 +51,6 @@ type MapDispatchToPropsType = {
 export type UsersPropsType = MapStatePropsType & MapDispatchToPropsType
 
 export class UsersContainer extends React.Component<UsersPropsType> {
-
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -57,6 +58,7 @@ export class UsersContainer extends React.Component<UsersPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.pageChanged(pageNumber, this.props.pageSize)
     }
+
 
     render() {
         return <>
