@@ -1,0 +1,37 @@
+.headerBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+
+.closeImg {
+    font-size: 12px;
+    width: 30px;
+    height: 30px;
+}
+
+.editFormBlock {
+    display: flex;
+    flex-direction: row;
+}
+
+.rightBlock {
+    max-width: 50%;
+    margin: 10px
+}
+
+.leftBlock {
+    max-width: 50%;
+    margin: 10px
+}
+
+.editContacts h4 {
+    margin: 0 auto;
+}
+.buttonBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

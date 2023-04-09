@@ -1,4 +1,6 @@
 import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+import {setIsLoadingAC} from "./app-reducer";
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -49,7 +51,7 @@ export type UsersReducerAT =
     | SetTotalUsersCountAT
     | ToggleIsFetchingAT
     | ToggleIsFollowingAT
-| OnlyFriendsAT
+    | OnlyFriendsAT
 
 export type PhotosType = {
     'small': string
@@ -138,45 +140,49 @@ export const toggleIsFollowingAC = (isFollowing: boolean, userId: number) => ({
 })
 export const onlyFriendsAC = (followed: boolean) => ({type: 'ONLY_FRIENDS', followed} as const)
 //thunk creators
-export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
-        dispatch(toggleIsFetchingAC(true))
-        usersAPI.getUsersAPI(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetchingAC(false))
-            dispatch(setUsersAC(data.items))
-        })
-    }
-}
-export const pageChanged = (pageNumber: number, pageSize: number) => {
-    return (dispatch: any) => {
-        dispatch(toggleIsFetchingAC(true))
-       dispatch(setCurrentPageAC(pageNumber))
-        usersAPI.getUsersAPI(pageNumber, pageSize).then(data => {
-            dispatch(toggleIsFetchingAC(false))
-            dispatch(setUsersAC(data.items))
-        })
-    }
-}
-export const unFollow = (userId: number) => {
-    return (dispatch: any) => {
-        dispatch(toggleIsFollowingAC(true, userId))
-        usersAPI.unFollowUserAPI(userId).then(response => {
 
-            if (response.data.resultCode === 0) {
-                dispatch(unFollowSuccess(userId))
-            }
-            dispatch(toggleIsFollowingAC(false, userId))
-        })
+export const getUsers = (currentPage: number, pageSize: number) => async (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC(true))
+    try {
+        const data = await usersAPI.getUsersAPI(currentPage, pageSize)
+        dispatch(setUsersAC(data.items))
+    } finally {
+        dispatch(setIsLoadingAC(false))
     }
 }
-export const follow = (userId: number) => {
-    return (dispatch: any) => {
-        dispatch(toggleIsFollowingAC(true, userId))
-        usersAPI.followUserAPI(userId).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(followSuccess(userId))
-            }
-            dispatch(toggleIsFollowingAC(false, userId))
-        })
+export const pageChanged = (pageNumber: number, pageSize: number) => async (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC(true))
+    dispatch(setCurrentPageAC(pageNumber))
+    try {
+        const data = await usersAPI.getUsersAPI(pageNumber, pageSize)
+        dispatch(setUsersAC(data.items))
+    } finally {
+        dispatch(setIsLoadingAC(false))
+    }
+}
+export const unFollow = (userId: number) => async (dispatch: Dispatch) => {
+    // dispatch(toggleIsFollowingAC(true, userId))
+    dispatch(setIsLoadingAC(true))
+    try {
+        const response = await usersAPI.unFollowUserAPI(userId)
+        if (response.data.resultCode === 0) {
+            dispatch(unFollowSuccess(userId))
+        }
+        // dispatch(toggleIsFollowingAC(false, userId))
+    } finally {
+        dispatch(setIsLoadingAC(false))
+    }
+}
+export const follow = (userId: number) => async (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC(true))
+    // dispatch(toggleIsFollowingAC(true, userId))
+    try {
+        const response = await usersAPI.followUserAPI(userId)
+        if (response.data.resultCode === 0) {
+            dispatch(followSuccess(userId))
+        }
+        dispatch(toggleIsFollowingAC(false, userId))
+    } finally {
+        dispatch(setIsLoadingAC(false))
     }
 }

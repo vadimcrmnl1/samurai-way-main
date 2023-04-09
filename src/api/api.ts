@@ -1,4 +1,5 @@
 import axios from "axios";
+import {UserProfileType} from "../redux/profile-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -17,10 +18,7 @@ export const usersAPI = {
     followUserAPI(id: number) {
         return instance.post(`follow/${id}`).then(response => response)
     },
-    getProfile(userId: string | undefined) {
-        return profileAPI.getProfile(userId)
 
-    }
 }
 export const profileAPI = {
     getProfile(userId: string | undefined) {
@@ -31,6 +29,18 @@ export const profileAPI = {
     },
     updateStatus(userStatus: string) {
         return instance.put(`profile/status`, {status: userStatus})
+    },
+    updatePhoto(file: {}) {
+        const formData: any = new FormData()
+        formData.append('image', file)
+        return instance.put<UpdatePhotoResponseType>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    },
+    updateProfile(data: EditProfileRequestType) {
+        return instance.put(`profile`, data)
     }
 }
 
@@ -50,4 +60,33 @@ export const loginAPI = {
     getCaptcha() {
         return instance.get('security/get-captcha-url')
     }
+}
+export type UpdatePhotoResponseType = {
+    data: {
+        small: string
+        large: string
+    }
+    resultCode: number
+    messages: string[]
+}
+export type EditProfileRequestType = {
+    userId: string | null
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+}
+export type EditProfileResponseType = {
+    resultCode: number
+    messages: string[]
+    data: UserProfileType
 }

@@ -15,6 +15,7 @@ const Dialogs = (props: DialogsPropsType) => {
     const addNewMessage = (formData: DialogsFormDataType) => {
 
         props.addMessage(formData.newMessageText)
+
     }
     return (
 

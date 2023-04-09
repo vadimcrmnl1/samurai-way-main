@@ -13,7 +13,6 @@ type MyPostsPropsType = {
 }
 
 const MyPosts = React.memo((props: MyPostsPropsType) => {
-    console.log('RENDER MYPOSTS')
     let PostsElements = props.posts.postsData.map(p => <Post key={p.id}
                                                        message={p.post}
                                                        likeCounts={p.likeCounts}

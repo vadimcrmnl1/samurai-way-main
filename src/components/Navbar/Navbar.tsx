@@ -14,7 +14,7 @@ const Navbar = (props: MapStateType) => {
 
     return (
         <nav className={styles.nav}>
-            <div className={styles.item}><NavLink to="/profile/26934" activeClassName={styles.activeLink}>Profile</NavLink>
+            <div className={styles.item}><NavLink to={`/profile/${props.auth.data.id}`} activeClassName={styles.activeLink}>Profile</NavLink>
             </div>
             <div className={styles.item}><NavLink to="/dialogs" activeClassName={styles.activeLink}>Messages</NavLink>
             </div>

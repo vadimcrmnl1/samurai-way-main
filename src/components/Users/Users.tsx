@@ -2,9 +2,9 @@ import React from "react";
 import s from "./UsersList.module.css";
 import {InitialStateOfUsersType, onlyFriendsAC} from "../../redux/users-reducer";
 import ava from './../../assets/avatar.png'
-import {Preloader} from "../common/Preloader/Preloader";
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import {SimpleBackdrop} from "../common/Backdrop/Backdrop";
 
 
 type UsersPropsType = {
@@ -37,6 +37,7 @@ export const Users = (props: UsersPropsType) => {
     let slicedPages = pages.slice(curPF, curPL);
 
     return <div className={s.content}>
+        <SimpleBackdrop/>
         <div className={s.mainTitle}>Users</div>
         <button className={s.button} onClick={handleFriendsOnly}>FRIENDS</button>
         <div className={s.pagesArea}>
@@ -47,7 +48,6 @@ export const Users = (props: UsersPropsType) => {
                                }}>{p}</button>
             })}
         </div>
-        <div className={s.toggle}>{props.isFetching ? <Preloader/> : null}</div>
         <div>{props.usersPage.items.map(u => <div className={s.userBlock} key={u.id}>
                 <span>
                     <div className={s.avaButton}>
@@ -59,9 +59,13 @@ export const Users = (props: UsersPropsType) => {
                     <div className={s.buttons}>
                         {u.followed ? <button style={{backgroundColor: 'green'}}
                                               disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
-                                              onClick={() => {props.unFollow(u.id)}}>Unfollow</button>
+                                              onClick={() => {
+                                                  props.unFollow(u.id)
+                                              }}>Unfollow</button>
                             : <button disabled={props.isFollowing.some(id => id === u.id)} className={s.button}
-                                      onClick={() => {props.follow(u.id)}}>Follow</button>
+                                      onClick={() => {
+                                          props.follow(u.id)
+                                      }}>Follow</button>
                         }
                         <NavLink to={'/profile/' + u.id}><button className={s.button}>Profile</button></NavLink>
                         <button className={s.button}>Chat</button>

@@ -13,11 +13,10 @@ import {ProfileListContainer} from "./components/Profile/ProfileListContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {LoginContainer} from './components/Login/Login';
 import {connect} from "react-redux";
-import {getAuthUserData} from "./redux/auth-reducer";
 import {compose} from "redux";
-import {initializeApp, InitialStateOfAppType} from "./redux/app-reducer";
+import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/reduxStore";
-import {Preloader} from "./components/common/Preloader/Preloader";
+import {SimpleBackdrop} from "./components/common/Backdrop/Backdrop";
 
 type MapStateToPropsType = {
     initialized: boolean
@@ -34,11 +33,12 @@ class App extends React.Component<AuthPropsType> {
     }
 
     render() {
-        if (!this.props.initialized) {
-            return <div className={s.preloader}><Preloader/></div>
-        }
+        // if (!this.props.initialized) {
+        //     return <div className={s.preloader}><Preloader/></div>
+        // }
         return (
             <div className={s.appWrapper}>
+                <SimpleBackdrop/>
                 <HeaderContainer/>
                 <NavbarContainer/>
                 <div className={s.appWrapperContent}>

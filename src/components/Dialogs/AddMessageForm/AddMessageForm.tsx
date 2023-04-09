@@ -22,6 +22,7 @@ export const AddMessageForm: React.FC<InjectedFormProps<DialogsFormDataType>> = 
                            type="text"
                            placeholder="Enter your message"
                            validate={[required, maxMessageLength]}/>
+
                 </div>
                 <div>
                     <button className={s.button}>Add message</button>
