@@ -30,8 +30,12 @@ export type SetPhotoAT = {
 
 type ProfileReducerAT = AddPostActionType | SetUserProfileAT | SetStatusAT | SetPhotoAT
 export type UserPhotosType = {
-    small: string
-    large: string
+    data: {
+        photos: {
+            small: string
+            large: string
+        }
+    }
 }
 type UserContactsType = {
     facebook: string
@@ -50,7 +54,10 @@ export type UserProfileType = {
     lookingForAJobDescription: string
     fullName: string
     userId: string | null
-    photos: UserPhotosType
+    photos: {
+        small: string
+        large: string
+    }
 }
 type PostType = {
     id: string
@@ -82,7 +89,7 @@ let initialState: InitialStateOfPostsType = {
             github: '',
             mainLink: ''
         },
-        lookingForAJob: null,
+        lookingForAJob: false,
         lookingForAJobDescription: '',
         fullName: '',
         userId: null,
@@ -110,7 +117,7 @@ export const profileReducer = (state: InitialStateOfPostsType = initialState, ac
             return {...state, userProfile: action.userProfile}
         }
         case SET_PHOTO:
-            return {...state, userProfile: {...state.userProfile, photos: action.data}}
+            return {...state, userProfile: {...state.userProfile, photos: action.data.data.photos}}
 
         default:
             return state
@@ -161,19 +168,20 @@ export const updatePhotoTC = (file: {}) => async (dispatch: Dispatch) => {
     try {
         const response = await profileAPI.updatePhoto(file)
         if (response.data.resultCode === 0) {
-            dispatch(setPhotoAC(response.data.data))
+            dispatch(setPhotoAC(response.data))
         }
     } finally {
         dispatch(setIsLoadingAC(false))
     }
 
 }
-export const editProfileTC = (data: EditProfileRequestType) => async (dispatch: Dispatch) => {
+export const editProfileTC = (data: EditProfileRequestType) => async (dispatch: any) => {
     dispatch(setIsLoadingAC(true))
     try {
         const response = await profileAPI.updateProfile(data)
+        console.log(data)
         if (response.data.resultCode === 0) {
-            getUserProfile(data.userId as string)
+            dispatch(getUserProfile(data.userId as string))
         }
     } finally {
         dispatch(setIsLoadingAC(false))

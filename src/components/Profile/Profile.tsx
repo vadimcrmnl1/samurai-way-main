@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import s from './Profile.module.css';
 import ProfileInfo from "./common/ProfileInfo";
 import {UserProfileType} from "../../redux/profile-reducer";
@@ -14,10 +14,7 @@ type ProfilePropsType = {
 
 const Profile = (props: ProfilePropsType) => {
 
-    useEffect(() => {
-
-    }, [props.owner, props.userStatus])
-    return (
+        return (
         <div className={s.content}>
             <SimpleBackdrop/>
             <ProfileInfo profile={props.profile}

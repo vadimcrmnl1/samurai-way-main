@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import s from '../Profile.module.css'
 import {UserProfileType} from "../../../redux/profile-reducer";
 import {useSelector} from "react-redux";
@@ -21,10 +21,6 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, userStatus, updat
     const getUserIdSelector = useSelector(getUserId)
     const ownerStr = Number(owner)
 
-    useEffect(() => {
-        // dispatch(getUserProfile(profile.userId as string))
-    }, [owner, userStatus, profile.photos])
-
 
     return (
         <div>
@@ -38,6 +34,8 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, userStatus, updat
                 />
 
                 <ProfileDescription profile={profile}
+                                    userId={userId}
+                                    owner={ownerStr}
                                     status={userStatus}
                                     updateStatus={updateStatus}
                 />

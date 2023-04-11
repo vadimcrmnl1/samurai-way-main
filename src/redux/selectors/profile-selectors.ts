@@ -6,3 +6,4 @@ export const getUserProfileInfo = (state: AppStateType) => {
 export const getUserStatus = (state: AppStateType) => {
     return state.profilePage.userStatus
 }
+export const selectAvatar = (state: AppStateType) => state.profilePage.userProfile.photos.large

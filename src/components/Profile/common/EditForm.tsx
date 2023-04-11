@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useFormik} from "formik";
 import s from './ProfileEditModal.module.css'
 import {Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@material-ui/core";
@@ -11,14 +11,16 @@ type EditFormPropsType = {
     profile: UserProfileType
 }
 
-const validationSchema = {}
+const validationSchema = {
+}
 
 export const EditForm: React.FC<EditFormPropsType> = ({handleClose, profile}) => {
     const dispatch = useDispatch()
+    const [lookForAJob, setLookForAJob] = useState<true | false>(true)
     const formik = useFormik({
         initialValues: {
             userId: profile.userId,
-            lookingForAJob: true,
+            lookingForAJob: lookForAJob,
             lookingForAJobDescription: profile.lookingForAJobDescription,
             fullName: profile.fullName,
             aboutMe: profile.aboutMe,
@@ -41,6 +43,7 @@ export const EditForm: React.FC<EditFormPropsType> = ({handleClose, profile}) =>
             handleClose()
         }
     })
+
     return (
         <form onSubmit={formik.handleSubmit}>
             <div className={s.editFormBlock}>
@@ -51,19 +54,22 @@ export const EditForm: React.FC<EditFormPropsType> = ({handleClose, profile}) =>
                                         onChange={formik.handleChange}/>
                     <TextFieldComponent id={'aboutMe'} name={'aboutMe'} label={'About me'} value={formik.values.aboutMe}
                                         onChange={formik.handleChange}/>
+
                     <FormControl style={{marginTop: '15px'}}>
-                        <FormLabel id="demo-row-radio-buttons-group-label">Looking for a job?</FormLabel>
+                        <FormLabel id="lookingForAJob">Looking for a job?</FormLabel>
                         <RadioGroup
                             row
-                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            aria-labelledby="lookingForAJob"
 
                         >
-                            <FormControlLabel id={'lookingForAJobDescription'} name={'lookingForAJobDescription'}
-                                              value="true" control={<Radio color={'primary'} size={'small'}/>}
-                                              label="Yes"/>
-                            <FormControlLabel id={'lookingForAJobDescription'} name={'lookingForAJobDescription'}
-                                              value="false" control={<Radio color={'secondary'} size={'small'}/>}
-                                              label="No"/>
+                            <FormControlLabel
+                                              value="true" control={<Radio value={'true'} color={'primary'}
+                                                                           size={'small'}/>}
+                                              label="Yes" />
+                            <FormControlLabel
+                                              value="false" control={<Radio name={'lookingForAJob'} value={'false'} color={'secondary'}
+                                                                            size={'small'}/>}
+                                              label="No" />
 
                         </RadioGroup>
                     </FormControl>

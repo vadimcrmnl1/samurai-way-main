@@ -63,14 +63,17 @@ export const loginAPI = {
 }
 export type UpdatePhotoResponseType = {
     data: {
-        small: string
-        large: string
+        photos: {
+            small: string
+            large: string
+        }
     }
     resultCode: number
     messages: string[]
 }
 export type EditProfileRequestType = {
     userId: string | null
+    aboutMe: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string

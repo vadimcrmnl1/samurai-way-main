@@ -4,6 +4,8 @@ import s from '../Profile.module.css'
 type ProfileStatusPropsType = {
     userStatus: string
     updateStatus: (userStatus: string) => void
+    userId: number | null
+    owner: number
 }
 
 export const ProfileStatus = (props: ProfileStatusPropsType) => {

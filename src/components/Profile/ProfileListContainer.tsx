@@ -34,6 +34,7 @@ type PathParamsType = {
 }
 type ProfilePropsType = MapStateToPropsType & MapDispatchToPropsType & RouteComponentProps<PathParamsType>
 
+
 class ProfileContainer extends React.Component<ProfilePropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
@@ -46,12 +47,8 @@ class ProfileContainer extends React.Component<ProfilePropsType> {
         if (userId !== prevProps.match.params.userId) {
             this.props.getUserProfile(userId)
             this.props.getStatus(userId)
-
         }
-        if (this.props.userProfile) {
-
-        }
-    }
+           }
 
     render() {
         return (
@@ -75,7 +72,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
     }
 }
-
+//
 export const ProfileListContainer = compose<React.ComponentType>(connect(mapStateToProps, {
     setUserProfileAC,
     getUserProfile,
